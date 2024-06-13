@@ -1,0 +1,22 @@
+name: Example workflow using Snyk
+on: push
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      uses: actions/checkout@master
+      name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      name: Install Snyk
+        run: npm install -g snyk
+      name: Run Snyk Test
+        run: snyk test --json > results.json
+      name: Convert Snyk Test Results to HTML
+        run: snyk-to-html -i results.json -o results.html
+      name: Upload Snyk Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: snyk-results
+          path: results.html
