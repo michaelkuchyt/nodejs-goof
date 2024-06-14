@@ -16,3 +16,8 @@ jobs:
         run: npm install snyk-to-html -g
       - name: Run snyk-to-html
         run: snyk-to-html -i results.json -o results.html
+      - name: Upload Snyk Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: snyk-results
+          path: results.html
