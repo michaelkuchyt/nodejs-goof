@@ -13,4 +13,6 @@ jobs:
         with:
           args: --severity-threshold=high --json --json-file-output=results.json
       - name: Install snyk-to-html
+        run: npm install snyk-to-html -g
+      - name: Run snyk-to-html
         run: snyk-to-html -i results.json -o results.html
